@@ -2,7 +2,11 @@ package com.kaansrflioglu.pe.controller;
 
 import com.kaansrflioglu.pe.dto.StudentRequest;
 import com.kaansrflioglu.pe.dto.StudentResponse;
+import com.kaansrflioglu.pe.model.Parent;
+import com.kaansrflioglu.pe.model.Sports;
 import com.kaansrflioglu.pe.model.Student;
+import com.kaansrflioglu.pe.repository.ParentRepository;
+import com.kaansrflioglu.pe.repository.SportsRepository;
 import com.kaansrflioglu.pe.service.StudentService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +22,17 @@ import java.util.stream.Collectors;
 public class StudentController {
 
     private final StudentService service;
+    private final SportsRepository sportsRepository;
+    private final ParentRepository parentRepository;
 
-    public StudentController(StudentService service) {
+    public StudentController(StudentService service,
+                             SportsRepository sportsRepository,
+                             ParentRepository parentRepository) {
         this.service = service;
+        this.sportsRepository = sportsRepository;
+        this.parentRepository = parentRepository;
     }
+
 
     @GetMapping
     public List<StudentResponse> getAll() {
@@ -63,16 +74,60 @@ public class StudentController {
         return StudentResponse.builder()
                 .id(student.getId())
                 .name(student.getName())
-                .email(student.getEmail())
-                .age(student.getAge())
+                .surname(student.getSurname())
+                .weight(student.getWeight())
+                .height(student.getHeight())
+                .pace(student.getPace())
+                .flexibility(student.getFlexibility())
+                .leap(student.getLeap())
+                .armStrength(student.getArmStrength())
+                .legStrength(student.getLegStrength())
+                .muscleAnatomy(student.getMuscleAnatomy())
+                .gradeLevel(student.getGradeLevel())
+                .gradeSection(student.getGradeSection())
+                .preferredSports(student.getPreferredSports())
+                .suitableSports(student.getSuitableSports())
+                .parents(student.getParents())
                 .build();
     }
 
     private Student toEntity(StudentRequest request) {
+        List<Sports> preferredSports = request.getPreferredSports() == null ? List.of() :
+                request.getPreferredSports().stream()
+                        .map(s -> sportsRepository.findById(s.getId())
+                                .orElseThrow(() -> new RuntimeException("Sports not found: " + s.getId())))
+                        .toList();
+
+        List<Sports> suitableSports = request.getSuitableSports() == null ? List.of() :
+                request.getSuitableSports().stream()
+                        .map(s -> sportsRepository.findById(s.getId())
+                                .orElseThrow(() -> new RuntimeException("Sports not found: " + s.getId())))
+                        .toList();
+
+        List<Parent> parents = request.getParents() == null ? List.of() :
+                request.getParents().stream()
+                        .map(p -> parentRepository.findById(p.getId())
+                                .orElseThrow(() -> new RuntimeException("Parent not found: " + p.getId())))
+                        .toList();
+
         return Student.builder()
                 .name(request.getName())
-                .email(request.getEmail())
-                .age(request.getAge())
+                .surname(request.getSurname())
+                .weight(request.getWeight())
+                .height(request.getHeight())
+                .pace(request.getPace())
+                .flexibility(request.getFlexibility())
+                .leap(request.getLeap())
+                .armStrength(request.getArmStrength())
+                .legStrength(request.getLegStrength())
+                .muscleAnatomy(request.getMuscleAnatomy())
+                .gradeLevel(request.getGradeLevel())
+                .gradeSection(request.getGradeSection())
+                .preferredSports(preferredSports)
+                .suitableSports(suitableSports)
+                .parents(parents)
                 .build();
     }
+
+
 }

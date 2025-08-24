@@ -35,9 +35,23 @@ public class StudentService {
 
     public Student update(String id, Student student) {
         Student existing = getById(id);
+
         existing.setName(student.getName());
-        existing.setEmail(student.getEmail());
-        existing.setAge(student.getAge());
+        existing.setSurname(student.getSurname());
+        existing.setWeight(student.getWeight());
+        existing.setHeight(student.getHeight());
+        existing.setPace(student.getPace());
+        existing.setFlexibility(student.getFlexibility());
+        existing.setLeap(student.getLeap());
+        existing.setArmStrength(student.getArmStrength());
+        existing.setLegStrength(student.getLegStrength());
+        existing.setMuscleAnatomy(student.getMuscleAnatomy());
+        existing.setGradeLevel(student.getGradeLevel());
+        existing.setGradeSection(student.getGradeSection());
+        existing.setPreferredSports(student.getPreferredSports());
+        existing.setSuitableSports(student.getSuitableSports());
+        existing.setParents(student.getParents());
+
         log.info("Öğrenci güncelleniyor: {}", id);
         return repository.save(existing);
     }
