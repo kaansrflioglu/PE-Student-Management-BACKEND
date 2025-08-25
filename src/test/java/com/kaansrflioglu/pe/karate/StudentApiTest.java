@@ -24,7 +24,9 @@ public class StudentApiTest {
     }
 
     @Karate.Test
-    Karate testStudents() {
-        return Karate.run("classpath:karate/students.feature");
+    Karate runAllFeatures() {
+        return Karate.run(
+                "classpath:karate/students.feature", "classpath:karate/parents.feature", "classpath:karate/sports.feature")
+                .relativeTo(getClass());
     }
 }

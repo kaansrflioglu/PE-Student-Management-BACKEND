@@ -1,14 +1,51 @@
 [
   {
-    "id": "1",
-    "name": "Ali",
-    "email": "ali@demo.com",
-    "age": 20
+    "name": "Kaan",
+    "surname": "Şereflioğlu",
+    "weight": 183,
+    "height": 62,
+    "pace": 105.5,
+    "flexibility": 106.2,
+    "leap": 195.6,
+    "armStrength": 200.3,
+    "picture": "https://i.hizliresim.com/7prjisx.png?_gl=1*1neabm9*_ga*MTg2MTEwOTgyMy4xNzU2MTI1NTY5*_ga_M9ZRXYS2YN*czE3NTYxMjU1NjgkbzEkZzEkdDE3NTYxMjU1ODYkajQyJGwwJGgw",
+    "legStrength": 304.2,
+    "muscleAnatomy": "muscleAnatomy",
+    "gradeLevel": 12,
+    "gradeSection": "A",
+    "preferredSports": [
+      {"id": "68ab8a76efee0e90d10dda63"}
+    ],
+    "suitableSports": [
+      {"id": "68ab8a76efee0e90d10dda64"}
+    ],
+    "parents": [
+      { "id": "68ab9437788865a531e1f07c"}
+    ]
   },
   {
-    "id": "2",
-    "name": "Ayşe",
-    "email": "ayse@demo.com",
-    "age": 22
+    "name": "Asil",
+    "surname": "Yenilmez",
+    "weight": 100,
+    "height": 25,
+    "pace": 35.5,
+    "flexibility": 5.2,
+    "leap": 100.6,
+    "armStrength": 20.3,
+    "picture": "https://i.hizliresim.com/7prjisx.png?_gl=1*1neabm9*_ga*MTg2MTEwOTgyMy4xNzU2MTI1NTY5*_ga_M9ZRXYS2YN*czE3NTYxMjU1NjgkbzEkZzEkdDE3NTYxMjU1ODYkajQyJGwwJGgw",
+    "legStrength": 54.2,
+    "muscleAnatomy": "muscleAnatomy",
+    "gradeLevel": 1,
+    "gradeSection": "A",
+    "preferredSports": [
+      {"id": "68ab8a76efee0e90d10dda63"},
+      {"id": "68ab8a75efee0e90d10dda5c"}
+    ],
+    "suitableSports": [
+      {"id": "68ab8a76efee0e90d10dda64" }
+    ],
+    "parents": [ { "id": "68ab9437788865a531e1f07c" } ]
   }
+
+
 ]

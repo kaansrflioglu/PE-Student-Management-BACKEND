@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Ahmet",
+    "surname": "Yılmaz",
+    "phone": "05551234567",
+    "height": 175.5,
+    "relation": "Father",
+    "sportsBackground": [
+      {
+        "id": "68ab8a76efee0e90d10dda63"
+      }
+    ]
+  }
+]
