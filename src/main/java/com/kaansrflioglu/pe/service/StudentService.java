@@ -43,6 +43,7 @@ public class StudentService {
         existing.setPace(student.getPace());
         existing.setFlexibility(student.getFlexibility());
         existing.setLeap(student.getLeap());
+        existing.setPicture(student.getPicture());
         existing.setArmStrength(student.getArmStrength());
         existing.setLegStrength(student.getLegStrength());
         existing.setMuscleAnatomy(student.getMuscleAnatomy());

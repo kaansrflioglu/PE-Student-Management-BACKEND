@@ -34,6 +34,8 @@ public class Student {
     private Byte gradeLevel;        // sınıf seviyesi
     private String gradeSection;    // şube
 
+    private String picture; // resim
+
     private List<Sports> preferredSports;  // öğrencinin tercih ettiği sporlar
     private List<Sports> suitableSports;   // öğrenciye uygun sporlar
 

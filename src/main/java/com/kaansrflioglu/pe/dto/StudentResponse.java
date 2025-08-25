@@ -25,6 +25,8 @@ public class StudentResponse {
     private Byte gradeLevel;
     private String gradeSection;
 
+    private String picture;
+
     private List<Sports> preferredSports;
     private List<Sports> suitableSports;
 
