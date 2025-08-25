@@ -1,19 +1,19 @@
 Feature: Student API tests
 
   Background:
-    * url 'http://localhost:8080/students'
+    * url 'http://localhost:8080/api/students'
     * def students = read('classpath:students.json')
     * def sports = read('classpath:sports.json')
     * def parents = read('classpath:parents.json')
 
   Scenario: Create a student
-    Given url 'http://localhost:8080/sports'
+    Given url 'http://localhost:8080/api/sports'
     Given request sports[0]
     When method post
     Then status 200
     * def sportsId = response.id
 
-    Given url 'http://localhost:8080/parents'
+    Given url 'http://localhost:8080/api/parents'
     * set parents[0].sportsBackground[0].id = sportsId
     Given request parents[0]
     When method post
@@ -24,7 +24,7 @@ Feature: Student API tests
     * set students[0].preferredSports[0].id = sportsId
     * set students[0].suitableSports[0].id = sportsId
 
-    Given url 'http://localhost:8080/students'
+    Given url 'http://localhost:8080/api/students'
     Given request students[0]
     When method post
     Then status 200
@@ -32,13 +32,13 @@ Feature: Student API tests
 
 
   Scenario: Get student by id
-    Given url 'http://localhost:8080/sports'
+    Given url 'http://localhost:8080/api/sports'
     Given request sports[0]
     When method post
     Then status 200
     * def sportsId = response.id
 
-    Given url 'http://localhost:8080/parents'
+    Given url 'http://localhost:8080/api/parents'
     * set parents[0].sportsBackground[0].id = sportsId
     Given request parents[0]
     When method post
@@ -49,7 +49,7 @@ Feature: Student API tests
     * set students[0].preferredSports[0].id = sportsId
     * set students[0].suitableSports[0].id = sportsId
 
-    Given url 'http://localhost:8080/students'
+    Given url 'http://localhost:8080/api/students'
     Given request students[0]
     When method post
     Then status 200
@@ -68,13 +68,13 @@ Feature: Student API tests
     * print response
 
   Scenario: Delete student by id
-    Given url 'http://localhost:8080/sports'
+    Given url 'http://localhost:8080/api/sports'
     Given request sports[0]
     When method post
     Then status 200
     * def sportsId = response.id
 
-    Given url 'http://localhost:8080/parents'
+    Given url 'http://localhost:8080/api/parents'
     * set parents[0].sportsBackground[0].id = sportsId
     Given request parents[0]
     When method post
@@ -85,7 +85,7 @@ Feature: Student API tests
     * set students[0].preferredSports[0].id = sportsId
     * set students[0].suitableSports[0].id = sportsId
 
-    Given url 'http://localhost:8080/students'
+    Given url 'http://localhost:8080/api/students'
     Given request students[0]
     When method post
     Then status 200

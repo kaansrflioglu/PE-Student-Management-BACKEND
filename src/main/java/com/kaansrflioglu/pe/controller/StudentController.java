@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/api/students")
 @Slf4j
 public class StudentController {
 

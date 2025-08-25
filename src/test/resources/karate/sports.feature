@@ -1,7 +1,7 @@
 Feature: Student API tests
 
   Background:
-    * url 'http://localhost:8080/sports'
+    * url 'http://localhost:8080/api/sports'
     * def sports = read('classpath:sports.json')
 
   Scenario: Create a sport

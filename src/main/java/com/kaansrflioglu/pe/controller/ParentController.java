@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/parents")
+@RequestMapping("/api/parents")
 @RequiredArgsConstructor
 public class ParentController {
 
