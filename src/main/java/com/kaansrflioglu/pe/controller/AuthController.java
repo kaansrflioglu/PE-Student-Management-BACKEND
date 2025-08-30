@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -25,14 +28,20 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public Map<String, String> login(@RequestBody User user) {
         User dbUser = userRepository.findByUsername(user.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (passwordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
-            return jwtService.generateToken(dbUser);
-        } else {
+        if (!passwordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
+
+        String token = jwtService.generateToken(dbUser);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+        response.put("role", dbUser.getRole());
+        return response;
     }
+
 }
