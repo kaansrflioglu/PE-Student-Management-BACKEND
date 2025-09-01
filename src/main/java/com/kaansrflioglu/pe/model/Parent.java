@@ -3,6 +3,7 @@ package com.kaansrflioglu.pe.model;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -26,5 +27,7 @@ public class Parent {
     private String phone;       // Telefon
     private double height;      // Boy
     private String relation;    // Yakınlık
+
+    @DBRef
     private List<Sports> sportsBackground; // Spor Geçmişi
 }

@@ -2,6 +2,7 @@ package com.kaansrflioglu.pe.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.NotBlank;
@@ -36,8 +37,11 @@ public class Student {
 
     private String picture; // resim
 
+    @DBRef
     private List<Sports> preferredSports;  // öğrencinin tercih ettiği sporlar
+    @DBRef
     private List<Sports> suitableSports;   // öğrenciye uygun sporlar
 
+    @DBRef
     private List<Parent> parents;   // ebeveyn bilgileri
 }
