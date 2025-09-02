@@ -95,6 +95,7 @@ public class ParentController {
                 .muscleAnatomy(student.getMuscleAnatomy())
                 .gradeLevel(student.getGradeLevel())
                 .gradeSection(student.getGradeSection())
+                .picture(student.getPicture())
                 .preferredSports(student.getPreferredSports())
                 .suitableSports(student.getSuitableSports())
                 .parents(student.getParents())
