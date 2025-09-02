@@ -69,6 +69,19 @@ public class StudentController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/{studentId}/parents/{parentId}")
+    public ResponseEntity<Void> removeParent(
+            @PathVariable String studentId,
+            @PathVariable String parentId) {
+        Student student = service.getById(studentId);
+        if (student.getParents() != null) {
+            student.getParents().removeIf(p -> p.getId().equals(parentId));
+            service.update(studentId, student);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+
     // --- DTO Mapping ---
     private StudentResponse toResponse(Student student) {
         return StudentResponse.builder()
