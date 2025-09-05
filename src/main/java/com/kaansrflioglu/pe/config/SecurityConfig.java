@@ -27,12 +27,21 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        //.requestMatchers("/api/students/**").hasRole("ADMIN")
-                        .requestMatchers("/api/students/**").hasAnyRole("ADMIN", "USER")
+
+                        .requestMatchers(HttpMethod.GET, "/api/students/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/students/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/students/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/students/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/parents/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/parents/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/parents/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/parents/**").hasRole("ADMIN")
+
                         .requestMatchers("/api/sports/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/api/parents/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 )
+
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

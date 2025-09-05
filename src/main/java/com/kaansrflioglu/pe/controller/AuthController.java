@@ -22,26 +22,34 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestBody User user) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            throw new RuntimeException("Bu kullanıcı adı zaten mevcut");
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("PENDING");
         userRepository.save(user);
-        return "User registered";
+        return "Kullanıcı oluşturuldu, onay bekleniyor.";
     }
+
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody User user) {
         User dbUser = userRepository.findByUsername(user.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
 
         if (!passwordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+            throw new RuntimeException("Hatalı giriş");
+        }
+
+        if ("PENDING".equals(dbUser.getRole())) {
+            throw new RuntimeException("Hesabınız onay bekliyor");
         }
 
         String token = jwtService.generateToken(dbUser);
-
         Map<String, String> response = new HashMap<>();
         response.put("token", token);
         response.put("role", dbUser.getRole());
         return response;
     }
-
 }
