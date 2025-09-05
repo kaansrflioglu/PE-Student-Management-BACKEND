@@ -1,5 +1,6 @@
 package com.kaansrflioglu.pe.service;
 
+import com.kaansrflioglu.pe.dto.StudentSummaryResponse;
 import com.kaansrflioglu.pe.exception.ResourceNotFoundException;
 import com.kaansrflioglu.pe.model.Student;
 import com.kaansrflioglu.pe.repository.StudentRepository;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Service
 @Slf4j
+@SuppressWarnings("unused")
 public class StudentService {
     private final StudentRepository repository;
 
@@ -20,6 +22,19 @@ public class StudentService {
     public List<Student> getAll() {
         log.info("Tüm öğrenciler listeleniyor");
         return repository.findAll();
+    }
+
+    public List<StudentSummaryResponse> getAllSummary() {
+        return repository.findAllSummary().stream()
+                .map(student -> new StudentSummaryResponse(
+                        student.getId(),
+                        student.getName(),
+                        student.getSurname(),
+                        student.getGradeLevel(),
+                        student.getGradeSection(),
+                        student.getPicture()
+                ))
+                .toList();
     }
 
     public Student getById(String id) {

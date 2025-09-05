@@ -2,6 +2,7 @@ package com.kaansrflioglu.pe.controller;
 
 import com.kaansrflioglu.pe.dto.StudentRequest;
 import com.kaansrflioglu.pe.dto.StudentResponse;
+import com.kaansrflioglu.pe.dto.StudentSummaryResponse;
 import com.kaansrflioglu.pe.model.Parent;
 import com.kaansrflioglu.pe.model.Sports;
 import com.kaansrflioglu.pe.model.Student;
@@ -14,11 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/students")
 @Slf4j
+@SuppressWarnings("unused")
 public class StudentController {
 
     private final StudentService service;
@@ -33,15 +34,20 @@ public class StudentController {
         this.parentRepository = parentRepository;
     }
 
-
+    // --- Summary endpoint ---
     @GetMapping
-    public List<StudentResponse> getAll() {
-        log.info("GET /students çağrıldı");
-        return service.getAll().stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
+    public List<StudentSummaryResponse> getAllStudents() {
+        long start = System.currentTimeMillis();
+        log.info("GET /students çağrıldı (summary)");
+
+        List<StudentSummaryResponse> response = service.getAllSummary();
+
+        long end = System.currentTimeMillis();
+        log.info("GET /students tamamlandı, {} ms sürdü", (end - start));
+        return response;
     }
 
+    // --- Full detail endpoint ---
     @GetMapping("/{id}")
     public StudentResponse getById(@PathVariable String id) {
         log.info("GET /students/{} çağrıldı", id);
@@ -80,7 +86,6 @@ public class StudentController {
         }
         return ResponseEntity.noContent().build();
     }
-
 
     // --- DTO Mapping ---
     private StudentResponse toResponse(Student student) {
@@ -143,6 +148,4 @@ public class StudentController {
                 .parents(parents)
                 .build();
     }
-
-
 }
